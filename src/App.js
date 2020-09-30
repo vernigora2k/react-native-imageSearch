@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {RootNavigator} from './navigators/RootNavigator';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootNavigator } from './navigators/RootNavigator';
 
 export class App extends Component {
   render = () => {

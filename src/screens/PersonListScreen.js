@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {FlatList, View, StyleSheet, Button} from 'react-native';
-import {PersonListItem} from '../components/PersonListItem';
+import React, { Component } from 'react';
+import { FlatList, View, StyleSheet, Button } from 'react-native';
+import { PersonListItem } from '../components/PersonListItem';
 import { toJson } from "unsplash-js";
 import { TextInput } from 'react-native-gesture-handler';
 
