@@ -16,6 +16,19 @@ const getImagesReducer = (state = INITIAL_STATE, action) => {
         //   current.push(addedImage)
         //   const newState = { current, possible }
         //   return newState
+
+        const {searchValue, results, isRefreshing} = action.payload
+        console.log(searchValue + ' ' + isRefreshing)
+        return {
+            ...state,
+            // list: state.list.concat(action.payload.results),
+            list: isRefreshing
+                ? results
+                : state.list.concat(results),
+            searchValue: searchValue,
+            isRefreshing: isRefreshing,
+        }
+
   default:
     return state
   }

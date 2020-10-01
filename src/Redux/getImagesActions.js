@@ -11,7 +11,11 @@ export const getData = (data) => (dispatch, getState) => {
     unsplash.search.photos(searchValue, {page})
     .then(toJsonUnsplash)
     .then(json => {
-        console.log(json)
+        dispatch(getImages({
+            results: json.results,
+            isRefreshing: isRefreshing,
+            searchValue: searchValue,
+        }))
     })
     // .then(json => {
     //   this.setState({
