@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     list: [],
     isLoading: false,
     searchValue: 'dog',
+    isRefreshing: true,
 };
 
 const getImagesReducer = (state = INITIAL_STATE, action) => {

@@ -5,14 +5,14 @@ import { toJson } from "unsplash-js";
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getImages } from '../Redux/getImagesActions'
+import { getImages, getData } from '../Redux/getImagesActions'
 
 const APP_ACCESS_KEY = 'axNBnsOWS9a1Joggi1L8-3LGqkfuxjrXubhs26DMQy0'
 const Unsplash = require('unsplash-js').default
-const unsplash = new Unsplash({
+export const unsplash = new Unsplash({
   accessKey: APP_ACCESS_KEY
 })
-const toJsonUnsplash = require('unsplash-js').toJson
+export const toJsonUnsplash = require('unsplash-js').toJson
 
 class PersonListScreen extends Component {
   state = {
@@ -45,7 +45,6 @@ class PersonListScreen extends Component {
           : this.state.list.concat(json.results)
       })
     })
-    .then(console.log(this.state.list))
   }
 
   onRefresh = () => {
@@ -89,9 +88,11 @@ class PersonListScreen extends Component {
           title='Search Photo'
           onPress={() => {
             this.getMoreData
-            this.props.getImages({
+            // this.props.getData()
+            this.props.getData({
               searchValue: this.state.searchValue, 
-              pageNumger: this.getPageNumber()
+              pageNumger: this.getPageNumber(),
+              isRefreshing: true,
             })
             console.log(this.props)
           }}
@@ -131,7 +132,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    getImages
+    getData
   }, dispatch)
 )
 
