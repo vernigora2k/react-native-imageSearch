@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet, Button } from 'react-native';
 import { PersonListItem } from '../components/PersonListItem';
 import { toJson } from "unsplash-js";
 import { TextInput } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 
 const APP_ACCESS_KEY = 'axNBnsOWS9a1Joggi1L8-3LGqkfuxjrXubhs26DMQy0'
 const Unsplash = require('unsplash-js').default
@@ -11,7 +12,7 @@ const unsplash = new Unsplash({
 })
 const toJsonUnsplash = require('unsplash-js').toJson
 
-export class PersonListScreen extends Component {
+class PersonListScreen extends Component {
   state = {
     list: [],
     isLoading: false,
@@ -63,6 +64,8 @@ export class PersonListScreen extends Component {
   render = () => {
     const {isLoading, list} = this.state;
 
+    console.log(this.props)
+
     return (
       <View style={styles.container}>
         <TextInput
@@ -105,3 +108,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   }
 });
+
+const mapStateToProps = (state) => {
+  const { images } = state
+  return images
+}
+
+export default connect(mapStateToProps)(PersonListScreen)

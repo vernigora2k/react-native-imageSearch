@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
+import { connect } from 'react-redux'
 
-export class PersonInfoScreen extends Component {
+class PersonInfoScreen extends Component {
   
   render = () => {
     const {imageInfo: {urls: {regular}}} = this.props.route.params;
@@ -26,3 +27,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const mapStateToProps = (state) => {
+  const { images } = state
+  return images
+}
+
+export default connect(mapStateToProps)(PersonInfoScreen)
