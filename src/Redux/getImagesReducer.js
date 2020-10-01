@@ -11,6 +11,7 @@ const getImagesReducer = (state = INITIAL_STATE, action) => {
       case 'GET_IMAGES_ACTIONS':
           
           console.log(action.payload)
+          console.log('this is reducer')
         //   current.push(addedImage)
         //   const newState = { current, possible }
         //   return newState

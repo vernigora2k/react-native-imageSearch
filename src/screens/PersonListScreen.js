@@ -25,6 +25,13 @@ class PersonListScreen extends Component {
     this.onRefresh();
   };
 
+  getPageNumber = (isRefreshing) => {
+    const limit = 15
+    const offset = isRefreshing ? 0 : this.state.list.length
+    const page = Math.ceil(offset / limit) + 1
+    return page
+  }
+
   getMoreData = (isRefreshing) => {
     const limit = 15
     const offset = isRefreshing ? 0 : this.state.list.length
@@ -82,7 +89,10 @@ class PersonListScreen extends Component {
           title='Search Photo'
           onPress={() => {
             this.getMoreData
-            this.props.getImages('Hello I am from dispatch getImages!')
+            this.props.getImages({
+              searchValue: this.state.searchValue, 
+              pageNumger: this.getPageNumber()
+            })
             console.log(this.props)
           }}
         />
