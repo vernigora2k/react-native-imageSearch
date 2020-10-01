@@ -4,6 +4,8 @@ import { PersonListItem } from '../components/PersonListItem';
 import { toJson } from "unsplash-js";
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { getImages } from '../Redux/getImagesActions'
 
 const APP_ACCESS_KEY = 'axNBnsOWS9a1Joggi1L8-3LGqkfuxjrXubhs26DMQy0'
 const Unsplash = require('unsplash-js').default
@@ -36,6 +38,7 @@ class PersonListScreen extends Component {
           : this.state.list.concat(json.results)
       })
     })
+    .then(console.log(this.state.list))
   }
 
   onRefresh = () => {
@@ -64,8 +67,6 @@ class PersonListScreen extends Component {
   render = () => {
     const {isLoading, list} = this.state;
 
-    console.log(this.props)
-
     return (
       <View style={styles.container}>
         <TextInput
@@ -79,7 +80,11 @@ class PersonListScreen extends Component {
         />
         <Button
           title='Search Photo'
-          onPress={this.getMoreData}
+          onPress={() => {
+            this.getMoreData
+            this.props.getImages('Hello I am from dispatch getImages!')
+            console.log(this.props)
+          }}
         />
         <FlatList
           style={styles.list}
@@ -114,4 +119,10 @@ const mapStateToProps = (state) => {
   return images
 }
 
-export default connect(mapStateToProps)(PersonListScreen)
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    getImages
+  }, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonListScreen)
