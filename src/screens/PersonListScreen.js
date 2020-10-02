@@ -16,8 +16,8 @@ export const toJsonUnsplash = require('unsplash-js').toJson
 
 class PersonListScreen extends Component {
   state = {
-    list: [],
-    isLoading: false,
+    // list: [],
+    // isLoading: false,
     searchValue: 'dog',
   };
 
@@ -27,25 +27,25 @@ class PersonListScreen extends Component {
 
   getPageNumber = (isRefreshing) => {
     const limit = 15
-    const offset = isRefreshing ? 0 : this.state.list.length
+    const offset = isRefreshing ? 0 : this.props.list.length
     const page = Math.ceil(offset / limit) + 1
     return page
   }
 
-  getMoreData = (isRefreshing) => {
-    const limit = 15
-    const offset = isRefreshing ? 0 : this.state.list.length
-    const page = Math.ceil(offset / limit) + 1
-    unsplash.search.photos(this.state.searchValue, {page})
-    .then(toJsonUnsplash)
-    .then(json => {
-      this.setState({
-        list: isRefreshing 
-          ? json.results 
-          : this.state.list.concat(json.results)
-      })
-    })
-  }
+  // getMoreData = (isRefreshing) => {
+  //   const limit = 15
+  //   const offset = isRefreshing ? 0 : this.state.list.length
+  //   const page = Math.ceil(offset / limit) + 1
+  //   unsplash.search.photos(this.state.searchValue, {page})
+  //   .then(toJsonUnsplash)
+  //   .then(json => {
+  //     this.setState({
+  //       list: isRefreshing 
+  //         ? json.results 
+  //         : this.state.list.concat(json.results)
+  //     })
+  //   })
+  // }
 
   onRefresh = () => {
     // this.getMoreData(true);
@@ -94,12 +94,18 @@ class PersonListScreen extends Component {
           onChangeText={(value) => {this.setState({
             searchValue: value
           })}}
-          onSubmitEditing={this.getMoreData}
+          onSubmitEditing={() => {
+            this.props.getData({
+              searchValue: this.state.searchValue, 
+              pageNumger: this.getPageNumber(),
+              isRefreshing: true,
+            })
+          }}
         />
         <Button
           title='Search Photo'
           onPress={() => {
-            this.getMoreData
+            // this.getMoreData
             // this.props.getData()
             this.props.getData({
               searchValue: this.state.searchValue, 
