@@ -17,11 +17,4 @@ export const getData = (data) => (dispatch, getState) => {
             searchValue: searchValue,
         }))
     })
-    // .then(json => {
-    //   this.setState({
-    //     list: isRefreshing 
-    //       ? json.results 
-    //       : this.state.list.concat(json.results)
-    //   })
-    // })
 }

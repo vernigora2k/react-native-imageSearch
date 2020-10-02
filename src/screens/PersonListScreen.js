@@ -16,8 +16,6 @@ export const toJsonUnsplash = require('unsplash-js').toJson
 
 class PersonListScreen extends Component {
   state = {
-    // list: [],
-    // isLoading: false,
     searchValue: 'dog',
   };
 
@@ -28,27 +26,10 @@ class PersonListScreen extends Component {
   getPageNumber = (isRefreshing) => {
     const limit = 15
     const offset = isRefreshing ? 0 : this.props.list.length
-    const page = Math.ceil(offset / limit) + 1
-    return page
+    return (Math.ceil(offset / limit) + 1)
   }
 
-  // getMoreData = (isRefreshing) => {
-  //   const limit = 15
-  //   const offset = isRefreshing ? 0 : this.state.list.length
-  //   const page = Math.ceil(offset / limit) + 1
-  //   unsplash.search.photos(this.state.searchValue, {page})
-  //   .then(toJsonUnsplash)
-  //   .then(json => {
-  //     this.setState({
-  //       list: isRefreshing 
-  //         ? json.results 
-  //         : this.state.list.concat(json.results)
-  //     })
-  //   })
-  // }
-
   onRefresh = () => {
-    // this.getMoreData(true);
     this.props.getData({
       searchValue: this.state.searchValue, 
       pageNumger: this.getPageNumber(),
@@ -57,7 +38,6 @@ class PersonListScreen extends Component {
   };
 
   onScrollToEnd = ({distanceFromEnd}) => {
-    // this.getMoreData(false);
     this.props.getData({
       searchValue: this.state.searchValue, 
       pageNumger: this.getPageNumber(),
@@ -81,9 +61,7 @@ class PersonListScreen extends Component {
   };
 
   render = () => {
-    // const {isLoading, list} = this.state;
-    console.log(this.props)
-    const {list, isLoading, searchValue} = this.props
+    const { list, isLoading } = this.props
 
     return (
       <View style={styles.container}>
@@ -105,14 +83,11 @@ class PersonListScreen extends Component {
         <Button
           title='Search Photo'
           onPress={() => {
-            // this.getMoreData
-            // this.props.getData()
             this.props.getData({
               searchValue: this.state.searchValue, 
               pageNumger: this.getPageNumber(),
               isRefreshing: true,
             })
-            console.log(this.props)
           }}
         />
         <FlatList
