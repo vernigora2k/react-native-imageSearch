@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { images } = state
-  return images
+  return state.images
 }
 
 export default connect(mapStateToProps)(PersonInfoScreen)

@@ -5,7 +5,7 @@ import { toJson } from "unsplash-js";
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getImages, getData } from '../Redux/getImagesActions'
+import { getData } from '../Redux/getImagesActions'
 
 const APP_ACCESS_KEY = 'axNBnsOWS9a1Joggi1L8-3LGqkfuxjrXubhs26DMQy0'
 const Unsplash = require('unsplash-js').default
@@ -119,8 +119,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { images } = state
-  return images
+  return state.images
 }
 
 const mapDispatchToProps = dispatch => (
