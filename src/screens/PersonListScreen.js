@@ -48,11 +48,21 @@ class PersonListScreen extends Component {
   }
 
   onRefresh = () => {
-    this.getMoreData(true);
+    // this.getMoreData(true);
+    this.props.getData({
+      searchValue: this.state.searchValue, 
+      pageNumger: this.getPageNumber(),
+      isRefreshing: true,
+    })
   };
 
   onScrollToEnd = ({distanceFromEnd}) => {
-    this.getMoreData(false);
+    // this.getMoreData(false);
+    this.props.getData({
+      searchValue: this.state.searchValue, 
+      pageNumger: this.getPageNumber(),
+      isRefreshing: false,
+    })
   };
 
   onItemPress = (item) => {
@@ -71,7 +81,9 @@ class PersonListScreen extends Component {
   };
 
   render = () => {
-    const {isLoading, list} = this.state;
+    // const {isLoading, list} = this.state;
+    console.log(this.props)
+    const {list, isLoading, searchValue} = this.props
 
     return (
       <View style={styles.container}>
